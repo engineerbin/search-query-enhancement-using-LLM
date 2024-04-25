@@ -1,0 +1,33 @@
+{% load markdown_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+
+    <!-- Search form -->
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Enter your search query here...">
+        <input type="submit" value="Search">
+    </form>
+
+    <h1>Search Results</h1>
+    
+    <!-- Check if a query was made -->
+    {% if query %}
+        <p><strong>Original Query:</strong> {{ query }}</p>
+        <!-- Check if a better query was generated -->
+        {% if better_query %}
+            <div>
+                <strong>Enhanced Query:</strong>
+                {{ better_query|markdown_to_html|safe }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    
+</body>
+</html>
