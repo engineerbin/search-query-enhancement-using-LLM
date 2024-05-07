@@ -8,18 +8,38 @@ body {
     justify-content: center;
     margin-bottom: 20px;
 }
+/* Style adjustments for the form elements */
 form {
     display: flex;
     gap: 10px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 input[type="text"] {
-    padding: 5px;
-    width: 300px;
+    padding: 10px 15px;
+    width: 400px; /* Increased width */
+    border: 2px solid #ddd; /* Stylish border */
+    font-size: 16px; /* Larger font size */
+    border-radius: 4px; /* Rounded corners */
 }
+
 input[type="submit"] {
-    padding: 5px 10px;
+    padding: 10px 15px;
     cursor: pointer;
+    font-size: 16px; /* Larger font size */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #4CAF50; /* Stylish green background */
+    color: white; /* Text color */
+    border: none; /* No border */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
 .results-container {
     display: flex;
     gap: 20px;
@@ -30,7 +50,7 @@ input[type="submit"] {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #767373;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 .results-column h2 {

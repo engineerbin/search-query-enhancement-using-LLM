@@ -13,7 +13,7 @@
         <form method="get" action="{% url 'search' %}">
             <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Enter your search query here...">
             <input type="submit" name="action" value="Search">
-            <input type="submit" name="action" value="Enhance Query">
+            <input type="submit" name="action" value="Enhance Search">
         </form>
     </div>
 
@@ -30,7 +30,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No documents found.</p>
+                <!-- <p>No documents found.</p> -->
             {% endif %}
         </div>
         <div class="results-column">
