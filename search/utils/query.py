@@ -6,8 +6,6 @@ from pyserini.search import SimpleSearcher
 import json
 import ollama
 
-ollama.pull('llama3')
-searcher = SimpleSearcher.from_prebuilt_index('msmarco-passage')
 
 
 def generate(query):
@@ -26,6 +24,7 @@ def generate(query):
   return ' '.join(response_texts)
 
 def search_document_query(query):
+    searcher = SimpleSearcher.from_prebuilt_index('msmarco-passage')
     hits = searcher.search(query, 10)
     return [hit.lucene_document.get('raw') for hit in hits]
 
@@ -42,6 +41,8 @@ def searching(query):
 
 
 def create_prompt(queryText, passages):
+    if queryText == "":
+        return ""
     prompt = f"""
     Given the query below and 10 irrrelevant passages retrieved by a search engine,
     Please expand the query to retrieve more relevant documents.
@@ -64,7 +65,10 @@ def create_prompt(queryText, passages):
 
 # return expanded query
 def get_expanded_query(prompt):
+    if prompt == "":
+        return ""
     try:
+        ollama.pull('llama3')
         response = ollama.chat(
             model='llama3',
             messages = [{

@@ -15,7 +15,19 @@
     </form>
 
     <h1>Search Results</h1>
-    
+    {% if documents %}
+        <h2>Documents:</h2>
+        <ul>
+            {% for document in documents %}
+            <li>
+                {{ document|markdown_to_html|safe }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents found.</p>
+    {% endif %}
+
     <!-- Check if a query was made -->
     {% if query %}
         <p><strong>Original Query:</strong> {{ query }}</p>
