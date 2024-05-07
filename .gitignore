@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+*.whl
+
+# Django
+*.log
+*.pot
+*.pyc
+*.mo
+db.sqlite3
+*.sqlite3-journal
+media/
+staticfiles/
+
+# Ignore migrations
+search/migrations/*.pyc
+search/migrations/*.py[cod]
+
+# Cache files
+.cache/
+.coverage
+.tox
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# MacOS
+.DS_Store
+
+# Byte-compiled files
+*.py[co]
+
+# Backup files
+*.bak
+*.swp

@@ -3,8 +3,8 @@ import markdown2
 
 register = template.Library()
 
-@register.filter
+@register.filter(name='markdown_to_html')
 def markdown_to_html(markdown_text):
-    """Convert Markdown text to HTML"""
-    html = markdown2.markdown(markdown_text)
-    return html
+    if markdown_text is None:
+        return ""
+    return markdown2.markdown(markdown_text)

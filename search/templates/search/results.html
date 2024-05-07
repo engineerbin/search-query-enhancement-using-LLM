@@ -1,46 +1,60 @@
 {% load markdown_filters %}
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'search/style.css' %}">
 </head>
 <body>
-
     <!-- Search form -->
-    <form method="get" action="{% url 'search' %}">
-        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Enter your search query here...">
-        <input type="submit" value="Search">
-    </form>
+    <div class="form-container">
+        <form method="get" action="{% url 'search' %}">
+            <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Enter your search query here...">
+            <input type="submit" name="action" value="Search">
+            <input type="submit" name="action" value="Enhance Query">
+        </form>
+    </div>
 
-    <h1>Search Results</h1>
-    {% if documents %}
-        <h2>Documents:</h2>
-        <ul>
-            {% for document in documents %}
-            <li>
-                {{ document|markdown_to_html|safe }}
-            </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No documents found.</p>
-    {% endif %}
-
-    <!-- Check if a query was made -->
-    {% if query %}
-        <p><strong>Original Query:</strong> {{ query }}</p>
-        <!-- Check if a better query was generated -->
-        {% if better_query %}
-            <div>
-                <strong>Enhanced Query:</strong>
-                {{ better_query|markdown_to_html|safe }}
+    <!-- <h1>Search Results</h1> -->
+    <div class="results-container">
+        <div class="results-column">
+            <h2>Original Query Results:</h2>
+            {% if documents %}
+                <ul>
+                    {% for document in documents %}
+                    <li class="result-item {% if forloop.counter0|divisibleby:2 %}even{% else %}odd{% endif %}">
+                        <strong>{{ forloop.counter }}.</strong> {{ document|markdown_to_html|safe }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No documents found.</p>
+            {% endif %}
+        </div>
+        <div class="results-column">
+            <div class="enhanced-query-header">
+                <h2>Enhanced Query Results:</h2>
+                {% if enhanced_query %}
+                    <div class="enhanced-query">
+                        <!-- <h3></h3> -->
+                        Enhanced Query:{{ enhanced_query|markdown_to_html|safe }}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-
-    {% endif %}
-
-    
+            {% if enhanced_documents %}
+                <ul>
+                    {% for document in enhanced_documents %}
+                    <li class="result-item {% if forloop.counter0|divisibleby:2 %}even{% else %}odd{% endif %}">
+                        <strong>{{ forloop.counter }}.</strong> {{ document|markdown_to_html|safe }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <!-- <p>No enhanced documents found.</p> -->
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
