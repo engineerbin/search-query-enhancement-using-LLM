@@ -18,7 +18,7 @@ def search_view(request):
     enhanced_documents = None
     enhanced_query = None
 
-    if action == 'Enhance Query':
+    if action == 'Enhance Search':
         # Call get_expanded_query to enhance the query
         prompt = query.create_prompt(query_text, documents)
         enhanced_query = query.get_expanded_query(prompt)

@@ -1,44 +1,64 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f8f9fa; /* Subtle light gray background */
+    background-color:#faf7f7; /* Subtle light gray background */
 }
-.form-container {
+/* .form-container {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
-/* Style adjustments for the form elements */
 form {
     display: flex;
     gap: 10px;
-    background-color: #fff; /* White background for contrast */
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 input[type="text"] {
-    padding: 10px 15px;
-    width: 400px; /* Increased width */
-    border: 2px solid #ddd; /* Stylish border */
-    font-size: 16px; /* Larger font size */
+    padding: 5px;
+    width: 300px;
+}
+input[type="submit"] {
+    padding: 5px 10px;
+    cursor: pointer;
+} */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    /* width: 100%; */
+}
+form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 700px;
+}
+
+input[type="text"] {
+    flex-grow: 1; /* Make input field take up more space */
+    padding: 10px;
+    font-size: 18px; /* Larger font size for better readability */
     border-radius: 4px; /* Rounded corners */
+    border: none;
+    outline: none; /* Remove default focus outline */
 }
 
 input[type="submit"] {
     padding: 10px 15px;
     cursor: pointer;
-    font-size: 16px; /* Larger font size */
-    border-radius: 4px; /* Rounded corners */
-    background-color: #4CAF50; /* Stylish green background */
-    color: white; /* Text color */
-    border: none; /* No border */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-size: 18px; /* Larger font for readability and easier clicking */
+    border-radius: 4px;
+    border: none;
+    background-color: #f0f0f0; /* Lighter background for buttons */
+    color: #333; /* Dark text on buttons for contrast */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049; /* Darker shade on hover */
+    background-color: #ccc; /* Darker background on hover */
+    color: #000; /* Change text color on hover for visibility */
 }
+
 
 .results-container {
     display: flex;
@@ -50,7 +70,7 @@ input[type="submit"]:hover {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #767373;
+    background-color: #dddbdb;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 .results-column h2 {
@@ -92,14 +112,6 @@ input[type="submit"]:hover {
     align-items: center;
     gap: 1rem; /* Adjust spacing as needed */
 }
-
-/* Additional styles for better readability */
-/* .results-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-} */
-
 
 
 /* Add these styles to your existing style.css */
