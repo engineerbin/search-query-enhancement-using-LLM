@@ -5,7 +5,7 @@ from .utils import query
 def search_view(request):
     # Example view for handling a search request
     query_text = request.GET.get('query', '')
-    documents = Document.objects.filter(content__icontains=query_text)
+    documents = query.searching(query_text)
     better_query = query.generate(query_text)
     
     return render(request, 'search/results.html', {

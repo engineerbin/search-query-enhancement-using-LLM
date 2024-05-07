@@ -2,6 +2,13 @@ import base64
 import vertexai
 from vertexai.generative_models import GenerativeModel, Part, FinishReason
 import vertexai.preview.generative_models as generative_models
+from pyserini.search import SimpleSearcher
+import json
+import ollama
+
+ollama.pull('llama3')
+searcher = SimpleSearcher.from_prebuilt_index('msmarco-passage')
+
 
 def generate(query):
   vertexai.init(project="flash-griffin-421422", location="us-central1")
@@ -18,8 +25,57 @@ def generate(query):
     print(response.text, end="")
   return ' '.join(response_texts)
 
+def search_document_query(query):
+    hits = searcher.search(query, 10)
+    return [hit.lucene_document.get('raw') for hit in hits]
+
+# return 10 documents from the query
+def searching(query):
+    passages = search_document_query(query)
+    document = []
+    for passage_str in passages:
+        passage_dict = json.loads(passage_str)
+        content = passage_dict['contents']
+        # print(content)
+        document.append(content)
+    return document
 
 
+def create_prompt(queryText, passages):
+    prompt = f"""
+    Given the query below and 10 irrrelevant passages retrieved by a search engine,
+    Please expand the query to retrieve more relevant documents.
+    Don't explain. Only mention the expanded query directly, without anything preceding and following it.
+
+    Query: {queryText}
+    Passage1: {passages[0]}
+    Passage2: {passages[1]}
+    Passage3: {passages[2]}
+    Passage4: {passages[3]}
+    Passage5: {passages[4]}
+    Passage6: {passages[5]}
+    Passage7: {passages[6]}
+    Passage8: {passages[7]}
+    Passage9: {passages[8]}
+    Passage10: {passages[9]}
+
+    """
+    return prompt
+
+# return expanded query
+def get_expanded_query(prompt):
+    try:
+        response = ollama.chat(
+            model='llama3',
+            messages = [{
+                'role': 'user',
+                'content': prompt,
+            }]
+        )
+        return response['message']['content']
+    except Exception as e:
+        print(f"Failed to get expanded query for prompt: {prompt}. Error: {e}")
+        return ''
 
 generation_config = {
     "max_output_tokens": 2048,
